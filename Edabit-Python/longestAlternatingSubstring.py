@@ -7,18 +7,34 @@ def longest_substring(digits):
     print (substirings)
 
 # longest_substring(3)
-digits="1234567891"
+digits="225424272163254474441338664823"
 combined=[]
 sequence=True
 substring=''
+substrings=[]
 # while sequence:
 
 for number in digits:
-    if int(number)%2==0:
-        substring+=number
-        combined.append((number,'Even'))
+    #if the substring is empty then it can start off as either even or odd.
+    if not substring:
+        if int(number)%2==0:
+            substring+=number
+            combined.append((number,'Even'))
+        else:
+            substring+=number
+            combined.append((number,'Odd'))
     else:
-        combined.append((number,'Odd'))
-
-print(combined[0])
-print(substring)
+        if int(substring[-1])%2==0 and int(number)%2!=0 :
+            substring+=number
+            combined.append((number,'Odd'))
+        elif int(substring[-1])%2!=0 and int(number)%2==0 :
+            substring+=number
+            combined.append((number,'Even'))
+        else:
+            if len(substring)>=2:
+                substrings.append(substring)
+                substring=''
+            else:
+                substring=''
+            
+print(substrings)
